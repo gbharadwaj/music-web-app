@@ -38,7 +38,7 @@ steps:
   inputs:
     serviceConnectionEndpoint: 'snyk'
     testType: 'app'
-    targetFile: '$(build.artifactstagingdirectory)'
+    targetFile: '**/.json'
     monitorWhen: 'always'
     failOnIssues: false
 
