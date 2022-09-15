@@ -30,17 +30,19 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    targetPath: '$(build.artifactstagingdirectory)'
+    targetPath: '$(- task: SnykSecurityScan@1
+  inputs:
+    serviceConnectionEndpoint: 'snyk_demo'
+    testType: 'app'
+    monitorWhen: 'always'
+    failOnIssues: true
+    projectName: 'freeproject_three'
+    testDirectory: '$(build.artifactstagingdirectory)'
+    additionalArguments: '--all-projects')'
     artifact: 'warfile'
     publishLocation: 'pipeline'
 
-- task: SnykSecurityScan@1
-  inputs:
-    serviceConnectionEndpoint: 'snyk'
-    testType: 'app'
-    targetFile: '**/surefire-reports/TEST-*.xml'
-    monitorWhen: 'always'
-    failOnIssues: false
+
 
 
 
