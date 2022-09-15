@@ -34,14 +34,6 @@ steps:
     artifact: 'warfile'
     publishLocation: 'pipeline'
 
-- task: SnykSecurityScan@1
-  inputs:
-    serviceConnectionEndpoint: 'snyk_demo'
-    testType: 'app'
-    monitorWhen: 'always'
-    failOnIssues: true
-    testDirectory: '$(build.artifactstagingdirectory)'
-    additionalArguments: '--all-projects'
 
 
 
