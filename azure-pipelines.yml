@@ -26,14 +26,22 @@ steps:
 - task: CopyFiles@2
   inputs:
     Contents: '**/.war'
-    TargetFolder: '$(- task: SnykSecurityScan@1
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(build.artifactstagingdirectory)'
+    artifact: 'warfile'
+    publishLocation: 'pipeline'
+
+- task: SnykSecurityScan@1
   inputs:
     serviceConnectionEndpoint: 'snyk_demo'
     testType: 'app'
     monitorWhen: 'always'
     failOnIssues: true
     testDirectory: '$(build.artifactstagingdirectory)'
-    additionalArguments: '--all-projects')'
+    additionalArguments: '--all-projects'
 
 
 
