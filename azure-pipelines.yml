@@ -15,9 +15,7 @@ pool:
   inputs:
     SonarCloud: 'sonarcloud'
     organization: 'spacenovartis'
-    scannerMode: 'MSBuild'
-    projectKey: 'spacenovartis_freeproject_three'
-    projectName: 'freeproject_three'
+    scannerMode: 'Other'
 
 steps:
 - task: Maven@3
