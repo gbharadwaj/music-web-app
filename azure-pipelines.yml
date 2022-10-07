@@ -11,6 +11,15 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'sonarcloud'
+    organization: 'spacenovartis'
+    scannerMode: 'MSBuild'
+    projectKey: 'spacenovartis_freeproject_three'
+    projectName: 'freeproject_three'
+
 steps:
 - task: Maven@3
   inputs:
@@ -23,6 +32,12 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
     
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+
 - task: CopyFiles@2
   inputs:
     Contents: '**/.war'
