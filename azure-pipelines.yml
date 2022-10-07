@@ -11,15 +11,16 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-
-
 steps:
-
 - task: SonarCloudPrepare@1
   inputs:
     SonarCloud: 'sonarcloud'
     organization: 'spacenovartis'
-    scannerMode: 'Other'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'spacenovartis_freeproject_three'
+    cliProjectName: 'freeproject_three'
+    cliSources: '.'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
